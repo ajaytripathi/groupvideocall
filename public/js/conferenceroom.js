@@ -64,7 +64,8 @@ function register() {
 	document.getElementById('join').style.display = 'none';
 	document.getElementById('room').style.display = 'block';
 	document.getElementById('user-header').innerText = name;
-	
+	$('#user-header').text(name);
+	$('#room-header').text('ROOM : ' + room);
 	  $('body').layout({
           // using custom &amp;#39;ID&amp;#39; paneSelectors
               west__paneSelector:  '#west'

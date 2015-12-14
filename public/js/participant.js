@@ -54,6 +54,7 @@ function Participant(name, ismaster) {
 	createChildElt(name);
 	
 	var video = document.getElementById('video-' + name);
+	var container = document.getElementById('video-tr-' + name);
 	video.autoplay = true;
 	video.controls = false;
 	$(document).on('click', '.videoelt', onVideoEltClick);
@@ -65,22 +66,22 @@ function Participant(name, ismaster) {
 			console.log("master create element --", tableBody);
 			var td_str = '';
 			td_str += '<td> <h4 style="text-align:center">' + name + '</h4>' + 
-							'<div  style="background-color: #070707;  color: #fff; min-height:100px">' + 
+							'<div id="'+ + 'video-div-' + name + '"  style="background-color: #070707;  color: #fff; min-height:100px">' + 
 							'<video id="'+ 'video-' + name + '" class="videoelt" width="100%" height="100%"></video>' +
 							'</div> </td>';
 			tableBody.append('<tr>' + td_str + '</tr>');
 			td_str = ' <tr> <td> <div class="line-separator"></div> </td>  </tr>';
-			tableBody.append('<tr>' + td_str + '</tr>');
+			tableBody.append('<tr id="'+ 'video-tr-'+ name +'" >' + td_str + '</tr>');
 			
 		}else {
 			console.log("child create element --");
 			var tableBody = $('#participants table tbody');
 			var td_str = '';
 			td_str += '<td> <h4 style="text-align:center">' + name + '</h4>' + 
-							'<div  style="background-color: #070707;  color: #fff; min-height:100px">' + 
+							'<div id="'+ + 'video-div-' + name + '"  style="background-color: #070707;  color: #fff; min-height:100px">' + 
 							'<video id="'+ 'video-' + name + '" class="videoelt" width="100%" height="100%"></video>' +
 							'</div> </td>';
-			tableBody.append('<tr>' + td_str + '</tr>');
+			tableBody.append('<tr id="'+ 'video-tr-'+ name +'" >' + td_str + '</tr>');
 			
 		}
 	}
