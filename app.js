@@ -82,14 +82,24 @@ app.use(function(err, req, res, next) {
  */
 // Configure logs 
 function configureLog() {
+	
 	/**
-	 * Delete previous log files
+	 * create log file path
 	 */
-	try {
-		fs.unlinkSync(path.join(__dirname, 'logs/webapp.log'));
-		fs.unlinkSync(path.join(__dirname, 'logs/webrtc.log'));
-	}catch(err){
-		console.error(err);
+	var logdir = path.join(__dirname, 'logs');
+
+	if (!fs.existsSync(logdir)){
+	    fs.mkdirSync(logdir);
+	}else {
+		/**
+		 * Delete previous log files
+		 */
+		try {
+			fs.unlinkSync(path.join(__dirname, 'logs/webapp.log'));
+			fs.unlinkSync(path.join(__dirname, 'logs/webrtc.log'));
+		}catch(err){
+			console.error(err);
+		}
 	}
 
 	log4js.configure(logger_cfg, { cwd: logging_path });	
