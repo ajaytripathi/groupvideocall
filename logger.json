@@ -1,0 +1,20 @@
+{    
+  "appenders": [
+	{
+      "type": "file",
+      "filename": "logs/webapp.log",
+      "category": "web",
+      "maxLogSize": 20480000,
+      "backups": 3,
+      "pattern": "-yyyy-MM-dd"
+	},
+    {
+	  "type": "file",
+      "filename": "logs/webrtc.log",
+      "maxLogSize": 20480000,
+      "backups": 3,
+      "category": "webrtc",
+	  "pattern": "-yyyy-MM-dd"
+    }
+  ]
+}

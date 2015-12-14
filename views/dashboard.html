@@ -1,0 +1,106 @@
+{% extends 'layout.html' %} {% block title %}{% endblock %} 
+{% block content %}
+<div id="container">
+	<div id="wrapper">
+		<div id="room" style="display: none;">
+			<div id="container" class="container-wrap">
+				<div id="center" class="ui-layout-center">
+					<div class="container-wrap">
+						<div class="col-md-12" id="center-video-elt">
+							<video id='center-video' width="100%" height="100%" controls
+								autoplay>
+								<source src="" type="video/mp4">
+							</video>
+						</div>
+					</div>
+				</div>
+				<div id="north" class="ui-layout-north">
+					<nav
+						class="navbar navbar-fixed-top navbar-transparent-light status-bar">
+						<a class="navbar-brand" href="/"></a>
+						<ul class="nav navbar-nav status-info">
+							<li class="nav-item">
+								<h2 class="section-title" id="room-header" >Room :</h2>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav pull-right list-inline status-info">
+							<li class="nav-item">
+								<table class="login_table">
+									<tbody>
+										<tr>
+											<td>
+												<div class="">
+													<h4>Ajay</h4>
+													<div class="">
+														<a href="" class="" 
+														  type="button" id="button-leave" onmouseup="leaveRoom();">Logout</a>
+													</div>
+												</div>
+											</td>
+											<td><span class="fa-stack fa-2x"></span></td>
+										</tr>
+									</tbody>
+								</table>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<div id="west" class="ui-layout-west">
+                    <div id="master-div">
+						<table>
+						    <tbody>
+                           </tbody>
+						<!-- 
+							<tr>
+								<td>
+									<h4 style="text-align: center;" id="master-name" >Ajay</h4>
+									<div style="background-color: #070707; color: #fff; min-height: 100px">
+										<video id='master-video' class="videoelt" width="100%" height="100%"></video>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="line-separator"></div>
+								</td>
+							</tr>
+							 -->
+						</table>
+                       </div>					
+					<div id="participants">
+					   <table>
+					       <tbody>
+					       
+					       </tbody>
+					   </table>
+					</div>
+					
+				</div>
+			</div>
+
+
+			<!-- 
+				<h2 id="room-header"></h2>
+				<div id="participants"></div>
+				<input type="button" id="button-leave" onmouseup="leaveRoom();"
+					value="Leave room">
+					
+				-->
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block extrascripts %} 
+   <script>
+    $(document).ready(function() {   
+        $('body').layout({
+            // using custom &amp;#39;ID&amp;#39; paneSelectors
+                west__paneSelector:  '#west'
+                ,  north__paneSelector: '#north'
+                ,  center__paneSelector: '#center'
+                                , west__minSize: 200
+                                , north__minSize: 60
+                });   
+    });
+    </script>
+{% endblock %}

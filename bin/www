@@ -1,0 +1,125 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var cfg = require('../global');
+var debug = require('debug')('webrtcsvr:server');
+var http = require('http');
+var https = require('https');
+var path = require('path');
+var fs = require('fs');
+var url = require('url');
+var minimist = require('minimist');
+var ws = require('ws');
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+//var port = normalizePort(process.env.PORT || '3000');
+var asUrl = url.parse(cfg.argv.as_uri);
+var port = asUrl.port;
+
+app.set('port', port);
+
+/**
+ * Get SSL Certificates
+ */
+var keyfile = path.join(__dirname, '/../server.key')
+var crtfile = path.join(__dirname, '/../server.crt')
+var options = { 
+   key: fs.readFileSync(keyfile),
+   cert: fs.readFileSync(crtfile),
+};
+
+
+/**
+ * Create HTTPS server.
+ */
+
+//var server = http.createServer(app);
+//pass in your express app and credentials to create an https server
+var server = https.createServer(options, app);
+server.listen(port, '0.0.0.0', function() {
+	console.log('Jektr webrtc server started');
+	console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
+});
+
+var wss = new ws.Server({
+    server : server,
+    path : '/groupcall'
+});
+
+require('../routes/wsroutes')(wss);
+exports.wss = wss;
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+//server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

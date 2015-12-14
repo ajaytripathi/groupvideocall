@@ -1,0 +1,98 @@
+{% extends 'layout.html' %} {% block title %}{% endblock %} 
+{% block content %}
+<div id="join" class="animate join" >
+		<div id="container">
+		    <div id="wrapper" style="top:60px;">
+			<h1>Join a Room</h1>
+			<form onsubmit="register(); return false;" accept-charset="UTF-8">
+				<p>
+					<input type="text" name="name" value="" id="name"
+						placeholder="Username" required>
+				</p>
+				<p>
+					<input type="text" name="room" value="" id="roomName"
+						placeholder="Room" required>
+				</p>
+				<p class="submit">
+					<input type="submit" name="commit" value="Join!">
+				</p>
+			</form>
+			</div>
+	</div>
+</div>
+
+	<div id="room" style="display: none;">
+<!-- 		<div id="container" class="container-wrap"> -->
+			<div id="north" class="ui-layout-north">
+				<nav class="navbar navbar-fixed-top navbar-transparent-light status-bar">
+					<a class="navbar-brand" href="/"></a>
+					<ul class="nav navbar-nav status-info">
+						<li class="nav-item">
+							<h2 class="section-title" id="room-header">Room :</h2>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav pull-right list-inline status-info">
+						<li class="nav-item">
+							<table class="login_table">
+								<tbody>
+									<tr>
+										<td>
+											<div class="">
+												<h4 id="user-header" >Ajay</h4>
+												<div class="">
+													<a href="" class="" type="button" id="button-leave"
+														onmouseup="leaveRoom();">Logout</a>
+												</div>
+											</div>
+										</td>
+										<td><span class="fa-stack fa-2x"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div id="west" class="ui-layout-west">
+				<div id="master-div">
+					<table>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div id="participants">
+					<table>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="center" class="ui-layout-center">
+                <div class="container-wrap">
+                    <div class="col-md-12 participant" id="center-video-elt" >
+                        <video id='center-video' width="100%" height="100%" autoplay>
+                            <source src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+			
+		</div>
+<!-- 	</div> -->
+
+{% endblock %} {% block extrascripts %}
+<script>
+    $(document).ready(function() {  
+    });  
+    </script>
+{% endblock %}
+
+
+<!-- 
+                <h2 id="room-header"></h2>
+                <div id="participants"></div>
+                <input type="button" id="button-leave" onmouseup="leaveRoom();"
+                    value="Leave room">
+                    
+                -->
