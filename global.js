@@ -15,7 +15,7 @@ config.hostname = 'dev.example.com';
 config.argv = minimist(process.argv.slice(2),
 		{
 	default: {
-		as_uri: "https://0.0.0.0:8080/",
+		as_uri: "https://0.0.0.0:5050/",
 		ws_uri: "ws://localhost:8888/kurento"
 	}
 });

@@ -207,9 +207,8 @@ function WebRtcPeer(mode, options, callback) {
             remoteVideo = attachMediaStream(remoteVideo, stream);
             remoteVideo.pause();
             //remoteVideo.src =  ;//url;
-            
-            remoteVideo.load();
-            console.log('Remote URL:', url);
+            if(remoteVideo.load) remoteVideo.load();
+            //console.log('Remote URL:', url);
         }
     }
     this.showLocalVideo = function () {
@@ -310,12 +309,12 @@ function WebRtcPeer(mode, options, callback) {
         if (localVideo) {
             localVideo.pause();
             localVideo.src = '';
-            localVideo.load();
+            if(localVideo.load) localVideo.load();
         }
         if (remoteVideo) {
             remoteVideo.pause();
             remoteVideo.src = '';
-            remoteVideo.load();
+            if(remoteVideo.load()) remoteVideo.load();
         }
         self.removeAllListeners();
         if (window.cancelChooseDesktopMedia !== undefined) {
